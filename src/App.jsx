@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Dashboard from './components/Dashboard/Dashboard'
 import EquipmentFinder from './components/EquipmentFinder/EquipmentFinder'
 import ResortFinder from './components/ResortFinder/ResortFinder'
+import ROICalculator from './components/ROICalculator/ROICalculator'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Route path="/" element={<Dashboard />} />
       <Route path="/equipment" element={<EquipmentFinder />} />
       <Route path="/resorts" element={<ResortFinder />} />
+      <Route path="/roi" element={<ROICalculator />} />
     </Routes>
   )
 }
