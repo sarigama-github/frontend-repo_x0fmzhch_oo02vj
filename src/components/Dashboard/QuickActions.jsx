@@ -1,5 +1,5 @@
 import { Card, Button } from "./Primitives";
-import { Map, Skiing, Calculator, Sparkles } from "lucide-react";
+import { Map, Snowflake, Calculator, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function QuickActions() {
@@ -16,7 +16,7 @@ export default function QuickActions() {
     {
       title: "Equipment Finder",
       desc: "Skis, boots, bindings matched to your profile",
-      icon: Skiing,
+      icon: Snowflake,
       color: "bg-[#FF6B35]/10 text-[#FF6B35]",
       cta: "Start Quiz",
       to: "/equipment",

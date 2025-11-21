@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { User, Mail, Crown, Skiing, Map, Settings, Share2, CalendarDays, Snowflake, Mountain, Wallet, BarChart3, Heart, Edit3, ExternalLink, CheckCircle2, Shield } from "lucide-react";
+import { User, Mail, Crown, Map, Settings, Share2, CalendarDays, Snowflake, Mountain, Wallet, BarChart3, Heart, Edit3, ExternalLink, CheckCircle2, Shield } from "lucide-react";
 import { Card, SectionTitle, Button, Avatar } from "../Dashboard/Primitives";
 
 const Tag = ({ children, icon: Icon }) => (
@@ -92,7 +92,7 @@ export default function Profile() {
                   <div>
                     <SectionTitle title="Preferences" />
                     <div className="flex flex-wrap gap-2">
-                      <Tag icon={Skiing}>Advanced</Tag>
+                      <Tag icon={Mountain}>Advanced</Tag>
                       <Tag icon={Snowflake}>Powder Bias: 70%</Tag>
                       <Tag icon={Map}>West • 2-5 hr drive</Tag>
                     </div>
