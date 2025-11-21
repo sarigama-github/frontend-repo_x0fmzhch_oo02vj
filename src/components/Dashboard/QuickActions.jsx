@@ -1,5 +1,6 @@
 import { Card, Button } from "./Primitives";
 import { Map, Skiing, Calculator, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function QuickActions() {
   const actions = [
@@ -9,6 +10,8 @@ export default function QuickActions() {
       icon: Map,
       color: "bg-[#60A5FA]/10 text-[#1E3A8A]",
       cta: "Open Finder",
+      to: "/resorts",
+      variant: "primary",
     },
     {
       title: "Equipment Finder",
@@ -16,6 +19,8 @@ export default function QuickActions() {
       icon: Skiing,
       color: "bg-[#FF6B35]/10 text-[#FF6B35]",
       cta: "Start Quiz",
+      to: "/equipment",
+      variant: "secondary",
     },
     {
       title: "ROI Calculator",
@@ -23,6 +28,8 @@ export default function QuickActions() {
       icon: Calculator,
       color: "bg-[#1E3A8A]/10 text-[#1E3A8A]",
       cta: "Calculate",
+      to: "/roi",
+      variant: "secondary",
     },
   ];
 
@@ -37,7 +44,9 @@ export default function QuickActions() {
             <div className="flex-1">
               <div className="text-gray-900 font-semibold mb-1">{a.title}</div>
               <div className="text-sm text-gray-500 mb-4">{a.desc}</div>
-              <Button variant={a.title === "Find a Resort" ? "primary" : "secondary"}>{a.cta}</Button>
+              <Link to={a.to} className="inline-flex">
+                <Button variant={a.variant}>{a.cta}</Button>
+              </Link>
             </div>
             <Sparkles className="h-5 w-5 text-gray-300" />
           </div>
