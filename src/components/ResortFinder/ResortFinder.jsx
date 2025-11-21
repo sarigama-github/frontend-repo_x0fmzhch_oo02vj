@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import Header from "../Dashboard/Header";
 import { Card, Button } from "../Dashboard/Primitives";
 import {
   MapPinned,
@@ -9,19 +8,14 @@ import {
   MountainSnow,
   Snowflake,
   CloudSnow,
-  Wind,
-  Sun,
   Gauge,
   Navigation,
   Clock4,
   Ticket,
-  Stars,
   Map as MapIcon,
   Trees,
   ThermometerSnowflake,
   BadgeCheck,
-  Star,
-  ThumbsUp,
   CheckCircle2,
   Filter,
 } from "lucide-react";
@@ -244,124 +238,121 @@ export default function ResortFinder() {
   const toggleSelect = (id) => setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
   return (
-    <div className="min-h-screen bg-[#F3F4F6] text-gray-900">
-      <Header />
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Resort Finder</h1>
-          <p className="text-gray-500 mt-1">Flagship: personalized resort recommendations by snow, travel time, and pass.</p>
-        </div>
+    <div className="text-gray-900">
+      <div className="mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Resort Finder</h1>
+        <p className="text-gray-500 mt-1">Flagship: personalized resort recommendations by snow, travel time, and pass.</p>
+      </div>
 
-        <div className="grid grid-cols-12 gap-6">
-          {/* Filters */}
-          <div className="col-span-12 lg:col-span-4 space-y-6">
-            <Card className="p-5">
-              <SectionTitle icon={CalendarDays} title="Trip details" action={<Clock4 className="h-5 w-5 text-gray-400" />} />
-              <div className="space-y-4">
-                <div>
-                  <div className="text-xs text-gray-500 mb-2">Dates</div>
-                  <div className="flex items-center gap-2">
-                    <input type="date" value={dateRange.start} onChange={(e)=>setDateRange((s)=>({ ...s, start: e.target.value }))} className="h-9 px-3 rounded-xl border-2 border-gray-200 text-sm focus:border-[#1E3A8A] w-full" />
-                    <span className="text-gray-400">–</span>
-                    <input type="date" value={dateRange.end} onChange={(e)=>setDateRange((s)=>({ ...s, end: e.target.value }))} className="h-9 px-3 rounded-xl border-2 border-gray-200 text-sm focus:border-[#1E3A8A] w-full" />
-                  </div>
-                </div>
-                <div>
-                  <div className="text-xs text-gray-500 mb-2">Travel time (hours)</div>
-                  <input type="range" min="0.5" max="6" step="0.5" value={maxHours} onChange={(e)=>setMaxHours(parseFloat(e.target.value))} className="w-full accent-[#1E3A8A]" />
-                  <div className="text-xs text-gray-600 mt-1">Up to <span className="font-medium text-gray-800">{maxHours}h</span> from your home base</div>
-                </div>
-                <div>
-                  <div className="text-xs text-gray-500 mb-2">Party size</div>
-                  <div className="flex items-center gap-2">
-                    <button onClick={()=>setParty(Math.max(1, party-1))} className="h-9 w-9 rounded-xl border-2 border-gray-200">-</button>
-                    <div className="px-3 h-9 rounded-xl border-2 border-gray-200 grid place-items-center text-sm w-full">{party} people</div>
-                    <button onClick={()=>setParty(party+1)} className="h-9 w-9 rounded-xl border-2 border-gray-200">+</button>
-                  </div>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-5">
-              <SectionTitle icon={Filter} title="Your profile" />
+      <div className="grid grid-cols-12 gap-6">
+        {/* Filters */}
+        <div className="col-span-12 lg:col-span-4 space-y-6">
+          <Card className="p-5">
+            <SectionTitle icon={CalendarDays} title="Trip details" action={<Clock4 className="h-5 w-5 text-gray-400" />} />
+            <div className="space-y-4">
               <div>
-                <div className="text-xs text-gray-500 mb-2">Ability</div>
-                <div className="flex flex-wrap gap-2">
-                  {abilities.map((a)=> (
-                    <Chip key={a} active={a===ability} onClick={()=>setAbility(a)}>{a}</Chip>
-                  ))}
+                <div className="text-xs text-gray-500 mb-2">Dates</div>
+                <div className="flex items-center gap-2">
+                  <input type="date" value={dateRange.start} onChange={(e)=>setDateRange((s)=>({ ...s, start: e.target.value }))} className="h-9 px-3 rounded-xl border-2 border-gray-200 text-sm focus:border-[#1E3A8A] w-full" />
+                  <span className="text-gray-400">–</span>
+                  <input type="date" value={dateRange.end} onChange={(e)=>setDateRange((s)=>({ ...s, end: e.target.value }))} className="h-9 px-3 rounded-xl border-2 border-gray-200 text-sm focus:border-[#1E3A8A] w-full" />
                 </div>
               </div>
-              <div className="mt-4">
-                <div className="text-xs text-gray-500 mb-2">Pass</div>
-                <div className="flex flex-wrap gap-2">
-                  {passes.map((p)=> (
-                    <Chip key={p} active={p===passType} onClick={()=>setPassType(p)}>{p}</Chip>
-                  ))}
+              <div>
+                <div className="text-xs text-gray-500 mb-2">Travel time (hours)</div>
+                <input type="range" min="0.5" max="6" step="0.5" value={maxHours} onChange={(e)=>setMaxHours(parseFloat(e.target.value))} className="w-full accent-[#1E3A8A]" />
+                <div className="text-xs text-gray-600 mt-1">Up to <span className="font-medium text-gray-800">{maxHours}h</span> from your home base</div>
+              </div>
+              <div>
+                <div className="text-xs text-gray-500 mb-2">Party size</div>
+                <div className="flex items-center gap-2">
+                  <button onClick={()=>setParty(Math.max(1, party-1))} className="h-9 w-9 rounded-xl border-2 border-gray-200">-</button>
+                  <div className="px-3 h-9 rounded-xl border-2 border-gray-200 grid place-items-center text-sm w-full">{party} people</div>
+                  <button onClick={()=>setParty(party+1)} className="h-9 w-9 rounded-xl border-2 border-gray-200">+</button>
                 </div>
               </div>
-              <div className="mt-4">
-                <div className="text-xs text-gray-500 mb-2">Region</div>
-                <div className="flex flex-wrap gap-2">
-                  {regions.map((r)=> (
-                    <Chip key={r} active={r===region} onClick={()=>setRegion(r)}>{r}</Chip>
-                  ))}
-                </div>
-              </div>
-            </Card>
+            </div>
+          </Card>
 
-            <Card className="p-5">
-              <SectionTitle icon={Snowflake} title="Preferences" />
-              <div className="space-y-4">
-                <div>
-                  <div className="text-xs text-gray-500 mb-2 flex items-center gap-2"><CloudSnow className="h-4 w-4" /> Powder bias</div>
-                  <input type="range" min="0" max="1" step="0.05" value={powderBias} onChange={(e)=>setPowderBias(parseFloat(e.target.value))} className="w-full accent-[#60A5FA]" />
-                </div>
-                <div>
-                  <div className="text-xs text-gray-500 mb-2 flex items-center gap-2"><Users className="h-4 w-4" /> Crowd tolerance</div>
-                  <input type="range" min="0" max="1" step="0.05" value={crowdTolerance} onChange={(e)=>setCrowdTolerance(parseFloat(e.target.value))} className="w-full accent-[#FF6B35]" />
-                </div>
-                <div>
-                  <div className="text-xs text-gray-500 mb-2 flex items-center gap-2"><Ticket className="h-4 w-4" /> Budget per day <span className="font-medium text-gray-700">${""}{budget}</span></div>
-                  <input type="range" min="80" max="300" step="5" value={budget} onChange={(e)=>setBudget(parseInt(e.target.value))} className="w-full accent-[#1E3A8A]" />
-                </div>
+          <Card className="p-5">
+            <SectionTitle icon={Filter} title="Your profile" />
+            <div>
+              <div className="text-xs text-gray-500 mb-2">Ability</div>
+              <div className="flex flex-wrap gap-2">
+                {abilities.map((a)=> (
+                  <Chip key={a} active={a===ability} onClick={()=>setAbility(a)}>{a}</Chip>
+                ))}
               </div>
-            </Card>
+            </div>
+            <div className="mt-4">
+              <div className="text-xs text-gray-500 mb-2">Pass</div>
+              <div className="flex flex-wrap gap-2">
+                {passes.map((p)=> (
+                  <Chip key={p} active={p===passType} onClick={()=>setPassType(p)}>{p}</Chip>
+                ))}
+              </div>
+            </div>
+            <div className="mt-4">
+              <div className="text-xs text-gray-500 mb-2">Region</div>
+              <div className="flex flex-wrap gap-2">
+                {regions.map((r)=> (
+                  <Chip key={r} active={r===region} onClick={()=>setRegion(r)}>{r}</Chip>
+                ))}
+              </div>
+            </div>
+          </Card>
 
-            <Card className="p-5">
-              <div className="text-sm font-semibold tracking-wide mb-2">Why these picks?</div>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-[#1E3A8A] mt-0.5" /> Snow reliability weighted by your powder bias and dates.</li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-[#1E3A8A] mt-0.5" /> Travel-time constraint applied from your home base.</li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-[#1E3A8A] mt-0.5" /> Pass compatibility and cost-per-day optimized.</li>
-              </ul>
-            </Card>
+          <Card className="p-5">
+            <SectionTitle icon={Snowflake} title="Preferences" />
+            <div className="space-y-4">
+              <div>
+                <div className="text-xs text-gray-500 mb-2 flex items-center gap-2"><CloudSnow className="h-4 w-4" /> Powder bias</div>
+                <input type="range" min="0" max="1" step="0.05" value={powderBias} onChange={(e)=>setPowderBias(parseFloat(e.target.value))} className="w-full accent-[#60A5FA]" />
+              </div>
+              <div>
+                <div className="text-xs text-gray-500 mb-2 flex items-center gap-2"><Users className="h-4 w-4" /> Crowd tolerance</div>
+                <input type="range" min="0" max="1" step="0.05" value={crowdTolerance} onChange={(e)=>setCrowdTolerance(parseFloat(e.target.value))} className="w-full accent-[#FF6B35]" />
+              </div>
+              <div>
+                <div className="text-xs text-gray-500 mb-2 flex items-center gap-2"><Ticket className="h-4 w-4" /> Budget per day <span className="font-medium text-gray-700">${""}{budget}</span></div>
+                <input type="range" min="80" max="300" step="5" value={budget} onChange={(e)=>setBudget(parseInt(e.target.value))} className="w-full accent-[#1E3A8A]" />
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-5">
+            <div className="text-sm font-semibold tracking-wide mb-2">Why these picks?</div>
+            <ul className="text-sm text-gray-600 space-y-2">
+              <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-[#1E3A8A] mt-0.5" /> Snow reliability weighted by your powder bias and dates.</li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-[#1E3A8A] mt-0.5" /> Travel-time constraint applied from your home base.</li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-[#1E3A8A] mt-0.5" /> Pass compatibility and cost-per-day optimized.</li>
+            </ul>
+          </Card>
+        </div>
+
+        {/* Results */}
+        <div className="col-span-12 lg:col-span-8 space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="text-sm text-gray-500">{filtered.length} resorts • best fit for your trip window</div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-500">Sort</span>
+              <select className="h-9 px-3 rounded-xl border-2 border-gray-200 text-sm focus:border-[#1E3A8A]">
+                <option>Best fit</option>
+                <option>Travel time</option>
+                <option>Snowfall</option>
+                <option>Ticket price</option>
+              </select>
+            </div>
           </div>
-
-          {/* Results */}
-          <div className="col-span-12 lg:col-span-8 space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-gray-500">{filtered.length} resorts • best fit for your trip window</div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500">Sort</span>
-                <select className="h-9 px-3 rounded-xl border-2 border-gray-200 text-sm focus:border-[#1E3A8A]">
-                  <option>Best fit</option>
-                  <option>Travel time</option>
-                  <option>Snowfall</option>
-                  <option>Ticket price</option>
-                </select>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 gap-4">
-              {filtered.map((r) => (
-                <motion.div key={r.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-                  <ResortCard r={r} selected={selected.includes(r.id)} toggleSelect={toggleSelect} />
-                </motion.div>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 gap-4">
+            {filtered.map((r) => (
+              <motion.div key={r.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+                <ResortCard r={r} selected={selected.includes(r.id)} toggleSelect={toggleSelect} />
+              </motion.div>
+            ))}
           </div>
         </div>
-      </main>
+      </div>
 
       {selected.length > 0 && (
         <div className="fixed bottom-4 left-0 right-0 px-4">

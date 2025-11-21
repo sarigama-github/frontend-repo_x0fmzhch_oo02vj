@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import Header from "../Dashboard/Header";
 import { Card, Button } from "../Dashboard/Primitives";
 import { SlidersHorizontal, Filter, Star, Tag, Ruler, Snowflake, Mountain, CheckCircle2, Heart, ShoppingCart, Sparkles } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -164,88 +163,85 @@ export default function EquipmentFinder() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F3F4F6] text-gray-900">
-      <Header />
-      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Equipment Finder</h1>
-          <p className="text-gray-500 mt-1">Personalized skis, boots, and bindings matched to your profile.</p>
-        </div>
+    <div className="text-gray-900">
+      <div className="mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Equipment Finder</h1>
+        <p className="text-gray-500 mt-1">Personalized skis, boots, and bindings matched to your profile.</p>
+      </div>
 
-        <div className="grid grid-cols-12 gap-6">
-          {/* Filters */}
-          <div className="col-span-12 lg:col-span-4 space-y-6">
-            <Card className="p-5">
-              <div className="flex items-center justify-between mb-3">
-                <div className="text-sm font-semibold tracking-wide">Your Profile</div>
-                <SlidersHorizontal className="h-5 w-5 text-gray-400" />
-              </div>
-              <div>
-                <div className="text-xs text-gray-500 mb-2">Skill level</div>
-                <div className="flex flex-wrap gap-2">
-                  {skills.map((s) => (
-                    <Chip key={s} active={s === skill} onClick={() => setSkill(s)}>{s}</Chip>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-4">
-                <div className="text-xs text-gray-500 mb-2">Preferred terrain</div>
-                <div className="flex flex-wrap gap-2">
-                  {terrains.map((t) => (
-                    <Chip key={t} active={terrainSel.includes(t)} onClick={() => setTerrainSel((prev) => prev.includes(t) ? prev.filter(x => x !== t) : [...prev, t])}>{t}</Chip>
-                  ))}
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-5">
-              <div className="flex items-center justify-between mb-2">
-                <div className="text-sm font-semibold tracking-wide">Fit & Range</div>
-                <Filter className="h-5 w-5 text-gray-400" />
-              </div>
-              <div className="mt-2">
-                <div className="text-xs text-gray-500 mb-2 flex items-center gap-2"><Ruler className="h-4 w-4" /> Target ski length: <span className="font-medium text-gray-700">{length} cm</span></div>
-                <input type="range" min="155" max="190" value={length} onChange={(e) => setLength(Number(e.target.value))} className="w-full accent-[#1E3A8A]" />
-              </div>
-              <div className="mt-4">
-                <div className="text-xs text-gray-500 mb-2 flex items-center gap-2"><Tag className="h-4 w-4" /> Budget: <span className="font-medium text-gray-700">${""}{budget}</span></div>
-                <input type="range" min="200" max="900" step="10" value={budget} onChange={(e) => setBudget(Number(e.target.value))} className="w-full accent-[#FF6B35]" />
-              </div>
-            </Card>
-
-            <Card className="p-5">
-              <div className="text-sm font-semibold tracking-wide mb-2">Why these picks?</div>
-              <ul className="text-sm text-gray-600 space-y-2">
-                <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-[#1E3A8A] mt-0.5" /> Tuned for all-mountain confidence with stable mid-stiff flex.</li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-[#1E3A8A] mt-0.5" /> Length window matched to your height and speed preference.</li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-[#1E3A8A] mt-0.5" /> Value-filter applied to surface the best price-to-performance.</li>
-              </ul>
-            </Card>
-          </div>
-
-          {/* Results */}
-          <div className="col-span-12 lg:col-span-8 space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-gray-500">{filtered.length} matches • updated just now</div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-500">Sort</span>
-                <select className="h-9 px-3 rounded-xl border-2 border-gray-200 text-sm focus:border-[#1E3A8A]">
-                  <option>Best match</option>
-                  <option>Price (low to high)</option>
-                  <option>Rating</option>
-                </select>
+      <div className="grid grid-cols-12 gap-6">
+        {/* Filters */}
+        <div className="col-span-12 lg:col-span-4 space-y-6">
+          <Card className="p-5">
+            <div className="flex items-center justify-between mb-3">
+              <div className="text-sm font-semibold tracking-wide">Your Profile</div>
+              <SlidersHorizontal className="h-5 w-5 text-gray-400" />
+            </div>
+            <div>
+              <div className="text-xs text-gray-500 mb-2">Skill level</div>
+              <div className="flex flex-wrap gap-2">
+                {skills.map((s) => (
+                  <Chip key={s} active={s === skill} onClick={() => setSkill(s)}>{s}</Chip>
+                ))}
               </div>
             </div>
-            <div className="grid grid-cols-1 gap-4">
-              {filtered.map((item) => (
-                <motion.div key={item.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-                  <ResultCard item={item} selected={selected.includes(item.id)} toggleSelect={toggleSelect} />
-                </motion.div>
-              ))}
+            <div className="mt-4">
+              <div className="text-xs text-gray-500 mb-2">Preferred terrain</div>
+              <div className="flex flex-wrap gap-2">
+                {terrains.map((t) => (
+                  <Chip key={t} active={terrainSel.includes(t)} onClick={() => setTerrainSel((prev) => prev.includes(t) ? prev.filter(x => x !== t) : [...prev, t])}>{t}</Chip>
+                ))}
+              </div>
+            </div>
+          </Card>
+
+          <Card className="p-5">
+            <div className="flex items-center justify-between mb-2">
+              <div className="text-sm font-semibold tracking-wide">Fit & Range</div>
+              <Filter className="h-5 w-5 text-gray-400" />
+            </div>
+            <div className="mt-2">
+              <div className="text-xs text-gray-500 mb-2 flex items-center gap-2"><Ruler className="h-4 w-4" /> Target ski length: <span className="font-medium text-gray-700">{length} cm</span></div>
+              <input type="range" min="155" max="190" value={length} onChange={(e) => setLength(Number(e.target.value))} className="w-full accent-[#1E3A8A]" />
+            </div>
+            <div className="mt-4">
+              <div className="text-xs text-gray-500 mb-2 flex items-center gap-2"><Tag className="h-4 w-4" /> Budget: <span className="font-medium text-gray-700">${""}{budget}</span></div>
+              <input type="range" min="200" max="900" step="10" value={budget} onChange={(e) => setBudget(Number(e.target.value))} className="w-full accent-[#FF6B35]" />
+            </div>
+          </Card>
+
+          <Card className="p-5">
+            <div className="text-sm font-semibold tracking-wide mb-2">Why these picks?</div>
+            <ul className="text-sm text-gray-600 space-y-2">
+              <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-[#1E3A8A] mt-0.5" /> Tuned for all-mountain confidence with stable mid-stiff flex.</li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-[#1E3A8A] mt-0.5" /> Length window matched to your height and speed preference.</li>
+              <li className="flex items-start gap-2"><CheckCircle2 className="h-4 w-4 text-[#1E3A8A] mt-0.5" /> Value-filter applied to surface the best price-to-performance.</li>
+            </ul>
+          </Card>
+        </div>
+
+        {/* Results */}
+        <div className="col-span-12 lg:col-span-8 space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="text-sm text-gray-500">{filtered.length} matches • updated just now</div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-500">Sort</span>
+              <select className="h-9 px-3 rounded-xl border-2 border-gray-200 text-sm focus:border-[#1E3A8A]">
+                <option>Best match</option>
+                <option>Price (low to high)</option>
+                <option>Rating</option>
+              </select>
             </div>
           </div>
+          <div className="grid grid-cols-1 gap-4">
+            {filtered.map((item) => (
+              <motion.div key={item.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+                <ResultCard item={item} selected={selected.includes(item.id)} toggleSelect={toggleSelect} />
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </main>
+      </div>
 
       {selected.length > 0 && (
         <div className="fixed bottom-4 left-0 right-0 px-4">
