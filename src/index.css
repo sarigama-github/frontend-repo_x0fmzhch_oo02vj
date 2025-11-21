@@ -13,4 +13,81 @@
 .page-enter-active { opacity: 1; transform: translateY(0); transition: all .3s ease; }
 
 /* Dark mode scaffolding */
-.dark body { background-color: #0b1220; }
+.dark body { background-color: #070b16; }
+
+/* Futuristic playful theme accents */
+:root {
+  --pc-primary: #7c3aed; /* purple */
+  --pc-secondary: #06b6d4; /* cyan */
+  --pc-accent: #ff6b35; /* orange */
+}
+
+/******** Animations ********/
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0px rgba(124,58,237,0.0), 0 0 0px rgba(6,182,212,0.0); }
+  50% { box-shadow: 0 0 32px rgba(124,58,237,0.25), 0 0 48px rgba(6,182,212,0.15); }
+}
+
+@keyframes rotateSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/******** Utility classes ********/
+.playful-gradient {
+  background: linear-gradient(120deg, var(--pc-primary), var(--pc-secondary), var(--pc-accent));
+  background-size: 200% 200%;
+  animation: gradientShift 12s ease infinite;
+}
+
+.card-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.floaty { animation: float 6s ease-in-out infinite; }
+.floaty-2 { animation: float 7.5s ease-in-out infinite; }
+.floaty-3 { animation: float 9s ease-in-out infinite; }
+
+.rotating { animation: rotateSlow 30s linear infinite; }
+
+/******** Decorative shells ********/
+.futuristic-grid::before {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at 50% 20%, black 20%, transparent 60%);
+}
+
+.starfield {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+}
+.starfield span {
+  position: absolute; width: 2px; height: 2px; background: rgba(255,255,255,0.9); border-radius: 999px;
+  filter: drop-shadow(0 0 6px rgba(124,58,237,0.6));
+}
+
+/* helper to quickly add a colorful border */
+.border-gradient {
+  position: relative;
+}
+.border-gradient::before {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit; z-index: 0;
+  background: linear-gradient(120deg, rgba(124,58,237,0.6), rgba(6,182,212,0.6), rgba(255,107,53,0.6));
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: destination-out; mask-composite: exclude;
+  padding: 1px; border-radius: inherit;
+}
